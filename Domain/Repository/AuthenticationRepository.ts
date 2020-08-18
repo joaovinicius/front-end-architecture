@@ -1,5 +1,5 @@
-import { IHttpClient } from "../Support/IHttpClient";
-import { IToken, Token } from "../Entity/Token";
+import { IHttpClient } from '../Support/IHttpClient';
+import { Token } from '../Entity/Token';
 
 export interface IAuthenticationRepository {
   createRequestToken(url: string): Promise<Token>,
