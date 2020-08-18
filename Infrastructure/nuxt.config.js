@@ -1,5 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   /*
    ** Nuxt rendering mode
@@ -11,8 +9,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   env: {
-    BASE_URL: process.env.BASE_URL || 'http://localhost:3000',
-    API_KEY: process.env.API_KEY
+    BASE_URL: process.env.NUXT_ENV_BASE_URL || 'http://localhost:3000',
+    API_KEY: process.env.NUXT_ENV_API_KEY,
+    API_BASE_URL: process.env.NUXT_ENV_API_BASE_URL
   },
   /*
    ** Nuxt target
@@ -24,8 +23,8 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: '%s - ' + process.env.NUXT_ENV_APP_NAME,
+    title: process.env.NUXT_ENV_APP_NAME || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -67,27 +66,16 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseUrl: 'https://api.themoviedb.org'
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+    theme: {}
   },
   /*
    ** Build configuration
