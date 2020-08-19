@@ -3,9 +3,9 @@ import { Catalog } from "../Entity/Catalog";
 import { Movie } from "../Entity/Movie";
 
 export interface IMovieRepository {
-  findPopular(apiKey: string): Promise<Catalog>,
-  search(apiKey: string): Promise<Catalog>
-  findById(apiKey: string): Promise<Movie>
+  findPopular(url: string): Promise<Catalog>,
+  search(url: string): Promise<Catalog>
+  findById(url: string): Promise<Movie>
 }
 
 export class MovieRepository implements IMovieRepository {
@@ -28,6 +28,6 @@ export class MovieRepository implements IMovieRepository {
   async findById(url: string): Promise<Movie> {
     const { data } = await this.httpClient.get(url)
 
-    return new Movie(data)
+    return new Movie(data, data.id)
   }
 }
