@@ -3,9 +3,9 @@ import { Catalog } from "../Entity/Catalog";
 import { Movie } from "../Entity/Movie";
 
 export interface IMovieRepository {
-  findPopular(url: string): Promise<Catalog>,
+  popularMovies(url: string): Promise<Catalog>,
   search(url: string): Promise<Catalog>
-  findById(url: string): Promise<Movie>
+  movieDetails(url: string): Promise<Movie>
 }
 
 export class MovieRepository implements IMovieRepository {
@@ -13,7 +13,7 @@ export class MovieRepository implements IMovieRepository {
     private httpClient: IHttpClient
   ) {}
 
-  async findPopular(url: string): Promise<Catalog> {
+  async popularMovies(url: string): Promise<Catalog> {
     const { data } = await this.httpClient.get(url)
 
     return new Catalog(data)
@@ -25,7 +25,7 @@ export class MovieRepository implements IMovieRepository {
     return new Catalog(data)
   }
 
-  async findById(url: string): Promise<Movie> {
+  async movieDetails(url: string): Promise<Movie> {
     const { data } = await this.httpClient.get(url)
 
     return new Movie(data, data.id)
