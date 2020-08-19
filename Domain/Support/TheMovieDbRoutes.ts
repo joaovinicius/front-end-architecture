@@ -27,11 +27,11 @@ class TheMovieDbRoutes {
     return `${this.baseUrl}/account?api_key=${this.apiKey}&session_id=${sessionId}`
   }
 
-  accountWatchlist(accountId: string, sessionId: string, page: number): string {
+  accountWatchlist(accountId: number, sessionId: string, page: number): string {
     return `${this.baseUrl}/account/${accountId}/watchlist/movies?api_key=${this.apiKey}&session_id=${sessionId}&page=${page}`
   }
 
-  addToAccountWatchlist(accountId: string, sessionId: string): string {
+  addToAccountWatchlist(accountId: number, sessionId: string): string {
     return `${this.baseUrl}/account/${accountId}/watchlist?api_key=${this.apiKey}&session_id=${sessionId}`
   }
 

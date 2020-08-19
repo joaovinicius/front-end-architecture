@@ -10,6 +10,6 @@ export class MovieDetailsUseCase {
 
   async execute(url: string): Promise<Movie> {
     return await this.movieRepository
-      .findById(url)
+      .movieDetails(url)
   }
 }

@@ -1,40 +1,15 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-
-import { MovieRepository }
-  from '../../Domain/Repository/MovieRepository'
-import { PopularMoviesUseCase }
-  from '../../Domain/UseCase/PopularMovies/PopularMoviesUseCase'
-import { SearchMoviesUseCase }
-  from '../../Domain/UseCase/SearchMovies/SearchMoviesUseCase'
-import { MovieDetailsUseCase }
-  from '../../Domain/UseCase/MovieDetails/MovieDetailsUseCase'
-import { UseCaseFactory }
-  from '../../Domain/Support/UseCaseFactory'
+import { MovieService }
+  from '../../Domain/Service/MovieService'
+import { ISearchMoviesDTO }
+  from '../../Domain/UseCase/SearchMovies/ISearchMoviesDTO'
 import { ICatalog } from '../../Domain/Entity/Catalog'
-import { TMDBRoutes } from '../../Domain/Support/TheMovieDbRoutes'
 import { RootState } from '~/store'
 import { IMovie } from '~/../Domain/Entity/Movie'
 
 const axiosInstance = axios.create()
-const movieRepository = new MovieRepository(axiosInstance)
-const popularMoviesUseCase = UseCaseFactory(
-  movieRepository,
-  PopularMoviesUseCase
-)
-const searchMoviesUseCase = UseCaseFactory(
-  movieRepository,
-  SearchMoviesUseCase
-)
-const movieDetailsUseCase = UseCaseFactory(
-  movieRepository,
-  MovieDetailsUseCase
-)
-
-interface SearchParams {
-  query: string,
-  page: number
-}
+const movieService = new MovieService(axiosInstance)
 
 export const state = () => ({
   movie: null,
@@ -62,7 +37,7 @@ export const mutations: MutationTree<MovieState> = {
 export const actions: ActionTree<MovieState, RootState> = {
   popularMovies ({ commit }, page: number = 1) {
     commit('SET_LOADING', false)
-    popularMoviesUseCase.execute(TMDBRoutes.popularMovies(page))
+    movieService.getPopularMovies(page)
       .then((data: ICatalog) => {
         commit('SET_CATALOG', data)
       })
@@ -74,9 +49,9 @@ export const actions: ActionTree<MovieState, RootState> = {
       })
   },
 
-  search ({ commit }, props: SearchParams) {
+  search ({ commit }, props: ISearchMoviesDTO) {
     commit('SET_LOADING', false)
-    searchMoviesUseCase.execute(TMDBRoutes.searchMovie(props.query, props.page))
+    movieService.searchMovies(props)
       .then((data: ICatalog) => {
         commit('SET_CATALOG', data)
       })
@@ -90,7 +65,7 @@ export const actions: ActionTree<MovieState, RootState> = {
 
   movieDetails ({ commit }, movieId: number) {
     commit('SET_LOADING', false)
-    movieDetailsUseCase.execute(TMDBRoutes.movieDetails(movieId))
+    movieService.getMovieDetails(movieId)
       .then((data: IMovie) => {
         commit('SET_MOVIE', data)
       })

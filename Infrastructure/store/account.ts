@@ -1,36 +1,15 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { AccountRepository }
-  from '../../Domain/Repository/AccountRepository'
-import { AddToMyWatchlistUseCase }
-  from '../../Domain/UseCase/AddToMyWatchlist/AddToMyWatchlistUseCase'
+import { AccountService }
+  from '../../Domain/Service/AccountService'
 import { IAddToMyWatchlistDTO }
   from '../../Domain/UseCase/AddToMyWatchlist/IAddToMyWatchlistDTO'
-import { MyWatchlistUseCase }
-  from '../../Domain/UseCase/MyWatchlist/MyWatchlistUseCase'
-import { MyAccountUseCase }
-  from '../../Domain/UseCase/MyAccount/MyAccountUseCase'
-import { UseCaseFactory }
-  from '../../Domain/Support/UseCaseFactory'
 import { IAccount } from '../../Domain/Entity/Account'
 import { ICatalog } from '../../Domain/Entity/Catalog'
-import { TMDBRoutes } from '../../Domain/Support/TheMovieDbRoutes'
 import { RootState } from '~/store'
 
 const axiosInstance = axios.create()
-const accountRepository = new AccountRepository(axiosInstance)
-const addToMyWatchlistUseCase = UseCaseFactory(
-  accountRepository,
-  AddToMyWatchlistUseCase
-)
-const myWatchlistUseCase = UseCaseFactory(
-  accountRepository,
-  MyWatchlistUseCase
-)
-const myAccountUseCase = UseCaseFactory(
-  accountRepository,
-  MyAccountUseCase
-)
+const accountService = new AccountService(axiosInstance)
 
 export const state = () => ({
   account: null,
@@ -43,7 +22,6 @@ export type AccountState = ReturnType<typeof state>
 
 export const getters: GetterTree<AccountState, RootState> = {
   account: state => state.account,
-  accountId: state => state.account?.id,
   loading: state => state.loading,
   errors: state => state.errors,
   saved: state => state.saved,
@@ -61,7 +39,7 @@ export const mutations: MutationTree<AccountState> = {
 export const actions: ActionTree<AccountState, RootState> = {
   myAccount ({ commit, getters }) {
     commit('SET_LOADING', true)
-    myAccountUseCase.execute(TMDBRoutes.account(getters.sessionId))
+    accountService.myAccount(getters.sessionId)
       .then((data: IAccount) => {
         commit('SET_ACCOUNT', data)
       })
@@ -75,10 +53,9 @@ export const actions: ActionTree<AccountState, RootState> = {
 
   myWatchlist ({ commit, getters }, page: number = 1) {
     commit('SET_LOADING', true)
-    const { sessionId, accountId } = getters
-    myWatchlistUseCase.execute(
-      TMDBRoutes.accountWatchlist(accountId, sessionId, page)
-    )
+    const { sessionId } = getters
+    const accountId = getters.account.id
+    accountService.myWatchlist(accountId, sessionId, page)
       .then((data: ICatalog) => {
         commit('movies/SET_CATALOG', data, { root: true })
       })
@@ -93,11 +70,9 @@ export const actions: ActionTree<AccountState, RootState> = {
   addToMyWatchlist ({ commit, getters }, payload: IAddToMyWatchlistDTO) {
     commit('SET_LOADING', true)
     commit('SET_SAVED', false)
-    const { sessionId, accountId } = getters
-    addToMyWatchlistUseCase.execute(
-      TMDBRoutes.addToAccountWatchlist(accountId, sessionId),
-      payload
-    )
+    const { sessionId } = getters
+    const accountId = getters.account.id
+    accountService.addToMyWatchlist(accountId, sessionId, payload)
       .then(() => {
         commit('SET_SAVED', true)
       })

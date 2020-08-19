@@ -10,6 +10,6 @@ export class PopularMoviesUseCase {
 
   async execute(url: string): Promise<Catalog> {
     return await this.movieRepository
-      .findPopular(url)
+      .popularMovies(url)
   }
 }
