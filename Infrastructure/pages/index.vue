@@ -12,7 +12,7 @@
         label="Password"
         required
       />
-      <button @click="handleSubmit">
+      <button>
         Send
       </button>
     </v-flex>
@@ -21,13 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import axios from 'axios'
-import { AuthenticationRepository }
-  from '../../Domain/Repository/AuthenticationRepository'
-import { CreateTokenUseCase }
-  from '../../Domain/UseCase/CreateToken/CreateTokenUseCase'
-import { instance as TMDBRoutes } from '../../Domain/Support/TheMovieDbRoutes'
-import { UseCaseFactory } from '../../Domain/Support/UseCaseFactory'
+import { mapActions } from 'vuex'
 
 export default Vue.extend({
   name: 'Index',
@@ -37,24 +31,13 @@ export default Vue.extend({
   },
 
   mounted () {
-    this.init()
+    this.createRequestToken()
   },
 
   methods: {
-    init () {
-      const axiosInstance = axios.create()
-      const createToken = UseCaseFactory(
-        axiosInstance,
-        AuthenticationRepository,
-        CreateTokenUseCase
-      )
-
-      createToken.execute(TMDBRoutes.authenticationTokenNew)
-    },
-
-    handleSubmit () {
-
-    }
+    ...mapActions('authentication', [
+      'createRequestToken'
+    ])
   }
 })
 </script>
