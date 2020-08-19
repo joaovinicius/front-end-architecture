@@ -1,21 +1,21 @@
 import { IAuthenticationRepository }
   from "../../Repository/AuthenticationRepository";
-import { IAutheticateDTO }
-  from "./IAutheticateDTO";
+import { ICreateTokenWithLoginDTO }
+  from "./ICreateTokenWithLoginDTO";
 import { IToken }
   from "../../Entity/Token";
 
-export class AuthenticateUseCase {
+export class CreateTokenWithLoginUseCase {
   constructor(
     private authenticationRepository: IAuthenticationRepository
   ) {}
 
   async execute(
     url: string,
-    data: IAutheticateDTO
+    data: ICreateTokenWithLoginDTO
   ): Promise<IToken> {
     return await this.authenticationRepository
-      .createUserSession(
+      .createTokenWithLogin(
         url,
         data.request_token,
         data.username,
