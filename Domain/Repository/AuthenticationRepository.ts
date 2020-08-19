@@ -1,15 +1,18 @@
 import { IHttpClient } from '../Support/IHttpClient';
 import { Token } from '../Entity/Token';
+import { Session } from '../Entity/Session';
 
 export interface IAuthenticationRepository {
   createRequestToken(url: string): Promise<Token>,
 
-  createUserSession(
+  createTokenWithLogin(
     url: string,
     request_token: string,
     username: string,
     password: string
-  ): Promise<Token>
+  ): Promise<Token>,
+
+  createSession(url: string, request_token: string): Promise<Session>
 }
 
 export class AuthenticationRepository implements IAuthenticationRepository {
@@ -23,7 +26,7 @@ export class AuthenticationRepository implements IAuthenticationRepository {
     return new Token(data)
   }
 
-  async createUserSession(
+  async createTokenWithLogin(
     url: string,
     request_token: string,
     username: string,
@@ -33,5 +36,12 @@ export class AuthenticationRepository implements IAuthenticationRepository {
       .post(url, { request_token, username, password })
 
     return new Token(data)
+  }
+
+  async createSession(url: string, request_token: string): Promise<Session> {
+    const { data } = await this.httpClient
+      .post(url, { request_token })
+
+    return new Session(data)
   }
 }
