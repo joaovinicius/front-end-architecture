@@ -35,7 +35,7 @@ export const mutations: MutationTree<MovieState> = {
 }
 
 export const actions: ActionTree<MovieState, RootState> = {
-  popularMovies ({ commit }, page: number = 1) {
+  fetchPopularMovies ({ commit }, page: number = 1) {
     commit('SET_LOADING', false)
     movieService.getPopularMovies(page)
       .then((data: ICatalog) => {
@@ -47,6 +47,18 @@ export const actions: ActionTree<MovieState, RootState> = {
       .finally(() => {
         commit('SET_LOADING', false)
       })
+  },
+
+  fetchNextPopularMovies ({ dispatch, getters }) {
+    dispatch('fetchPopularMovies', getters.catalog.page + 1)
+  },
+
+  fetchPreviousPopularMovies ({ dispatch, getters }) {
+    dispatch('fetchPopularMovies', getters.catalog.page - 1)
+  },
+
+  fetchPagePopularMovies ({ dispatch }, page: number) {
+    dispatch('fetchPopularMovies', page)
   },
 
   search ({ commit }, props: ISearchMoviesDTO) {
