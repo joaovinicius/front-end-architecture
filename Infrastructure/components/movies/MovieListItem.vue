@@ -1,6 +1,8 @@
 <template>
   <v-card
     flat
+    :to="{ name: 'movie-id', params: { id: movie.id }}"
+    class="h-100 pb-2"
   >
     <v-img
       class="white--text align-end"
@@ -14,12 +16,18 @@
 
     <div class="d-flex justify-space-between align-center px-2">
       <v-rating
+        color="amber"
         half-increments
+        dense
+        readonly
         :length="5"
+        size="14"
         :value="movie.vote_average / 2"
       />
 
-      <v-chip v-text="movie.vote_count" />
+      <div class="grey--text ml-4">
+        {{ movie.vote_average / 2 }} ({{ movie.vote_count }})
+      </div>
     </div>
 
     <v-chip
@@ -33,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 import { ICatalogMovie } from '../../../Domain/Entity/Catalog'
 
 export default Vue.extend({
@@ -41,14 +49,14 @@ export default Vue.extend({
 
   props: {
     movie: {
-      type: Object as () => ICatalogMovie,
+      type: Object,
       required: true
-    }
+    } as PropOptions<ICatalogMovie>
   },
 
   computed: {
     subtitle (): string {
-      return `Original title: ${this.movie.original_title} - Premiered: ${this.movie.release_date}`
+      return `Original title: ${this.movie.original_title} - Release: ${this.movie.release_date}`
     }
   }
 })
@@ -56,6 +64,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .h-100 {
-  height: 10%;
+  height: 100%;
 }
 </style>
