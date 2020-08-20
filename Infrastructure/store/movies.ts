@@ -61,7 +61,7 @@ export const actions: ActionTree<MovieState, RootState> = {
     dispatch('fetchPopularMovies', page)
   },
 
-  search ({ commit }, props: ISearchMoviesDTO) {
+  searchMovies ({ commit }, props: ISearchMoviesDTO) {
     commit('SET_LOADING', false)
     movieService.searchMovies(props)
       .then((data: ICatalog) => {
@@ -75,7 +75,7 @@ export const actions: ActionTree<MovieState, RootState> = {
       })
   },
 
-  movieDetails ({ commit }, movieId: number) {
+  fetchMovieDetails ({ commit }, movieId: number) {
     commit('SET_LOADING', false)
     movieService.getMovieDetails(movieId)
       .then((data: IMovie) => {
