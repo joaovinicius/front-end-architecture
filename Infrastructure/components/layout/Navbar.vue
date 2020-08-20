@@ -1,29 +1,65 @@
 <template>
   <v-app-bar
     app
-    absolute
-    elevate-on-scroll
+    fixed
   >
-    <v-toolbar-title>
-      SimpleFlix
-    </v-toolbar-title>
+    <v-btn link color="error" :to="{ name: 'index' }">
+      SIMPLEFLIX
+    </v-btn>
 
     <v-spacer />
 
-    <v-btn icon>
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>
+    <v-toolbar flat>
+      <v-text-field
+        v-model="input"
+        placeholder="Search about your favorite movie"
+        filled
+        rounded
+        dense
+        hide-details
+      />
+    </v-toolbar>
 
-    <v-btn icon>
-      <v-icon>mdi-account</v-icon>
+    <v-btn
+      v-if="authenticated"
+      text
+      :to="{ name: 'watchlist' }"
+    >
+      Watchlist
     </v-btn>
   </v-app-bar>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
-  name: 'Navbar'
+  name: 'Navbar',
+
+  data () {
+    return {
+      query: ''
+    }
+  },
+
+  computed: {
+    ...mapGetters('authentication', ['authenticated']),
+
+    input: {
+      get () {
+        return this.query
+      },
+      set (query: string) {
+        if (this.timeout) {
+          clearTimeout(this.timeout)
+        }
+        this.timeout = setTimeout(() => {
+          this.query = query
+          this.$router.push({ name: 'search-query', params: { query } })
+        }, 300)
+      }
+    }
+  }
 })
 </script>
