@@ -8,7 +8,7 @@ class TheMovieDbRoutes {
   }
 
   authentication (uri: string): string {
-    return `${this.baseUrl}/authentication/${uri}?api_key=${this.apiKey}`
+    return `${this.baseUrl}authentication/${uri}?api_key=${this.apiKey}`
   }
 
   get createRequestToken (): string {
@@ -24,27 +24,27 @@ class TheMovieDbRoutes {
   }
 
   account (sessionId: string): string {
-    return `${this.baseUrl}/account?api_key=${this.apiKey}&session_id=${sessionId}`
+    return `${this.baseUrl}account?api_key=${this.apiKey}&session_id=${sessionId}`
   }
 
   accountWatchlist(accountId: number, sessionId: string, page: number): string {
-    return `${this.baseUrl}/account/${accountId}/watchlist/movies?api_key=${this.apiKey}&session_id=${sessionId}&page=${page}`
+    return `${this.baseUrl}account/${accountId}/watchlist/movies?api_key=${this.apiKey}&session_id=${sessionId}&page=${page}`
   }
 
   addToAccountWatchlist(accountId: number, sessionId: string): string {
-    return `${this.baseUrl}/account/${accountId}/watchlist?api_key=${this.apiKey}&session_id=${sessionId}`
+    return `${this.baseUrl}account/${accountId}/watchlist?api_key=${this.apiKey}&session_id=${sessionId}`
   }
 
   popularMovies(page: number): string {
-    return `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`
+    return `${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}`
   }
 
   movieDetails(movieId: number): string {
-    return `${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}`
+    return `${this.baseUrl}movie/${movieId}?api_key=${this.apiKey}`
   }
 
   searchMovie(query: string, page: number): string {
-    return `${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${query}&page=${page}`
+    return `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${query}&page=${page}`
   }
 }
 
