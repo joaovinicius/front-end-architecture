@@ -41,15 +41,15 @@ export default Vue.extend({
       'fetchPagePopularMovies'
     ]),
 
-    handleNextPage () {
+    handleNextPage ():void {
       this.fetchNextPopularMovies()
     },
 
-    handlePreviousPage () {
+    handlePreviousPage ():void {
       this.fetchPreviousPopularMovies()
     },
 
-    handleGoToPage (page: number) {
+    handleGoToPage (page: number):void {
       this.fetchPagePopularMovies(page)
     }
   }

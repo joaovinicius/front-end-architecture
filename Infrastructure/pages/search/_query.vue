@@ -28,11 +28,11 @@ export default Vue.extend({
       'catalog'
     ]),
 
-    query () {
+    query ():string {
       return this.$route.params.query
     },
 
-    searchBy () {
+    searchBy ():string {
       return `Search by ${this.query}`
     }
   },
@@ -44,15 +44,15 @@ export default Vue.extend({
   methods: {
     ...mapActions('movies', ['searchMovies']),
 
-    handleNextPage () {
+    handleNextPage ():void {
       this.searchMovies({ query: this.query, page: (this.catalog.page + 1) })
     },
 
-    handlePreviousPage () {
+    handlePreviousPage ():void {
       this.searchMovies({ query: this.query, page: (this.catalog.page - 1) })
     },
 
-    handleGoToPage (page: number) {
+    handleGoToPage (page: number):void {
       this.searchMovies({ query: this.query, page })
     }
   }

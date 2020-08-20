@@ -39,7 +39,8 @@ export default Vue.extend({
 
   data () {
     return {
-      query: ''
+      query: '' as string,
+      timeout: null as any
     }
   },
 
@@ -47,10 +48,10 @@ export default Vue.extend({
     ...mapGetters('authentication', ['authenticated']),
 
     input: {
-      get () {
+      get ():string {
         return this.query
       },
-      set (query: string) {
+      set (query: string):void {
         if (this.timeout) {
           clearTimeout(this.timeout)
         }
