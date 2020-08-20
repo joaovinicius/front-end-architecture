@@ -1,4 +1,4 @@
-interface Movie {
+export interface ICatalogMovie {
   poster_path: string,
   adult: boolean,
   overview: string,
@@ -17,14 +17,14 @@ interface Movie {
 
 export interface ICatalog {
   page: number,
-  results: Array<Movie>,
+  results: Array<ICatalogMovie>,
   total_results: number,
   total_pages: number
 }
 
 export class Catalog implements ICatalog {
   public page: number
-  public results: Array<Movie>
+  public results: Array<ICatalogMovie>
   public total_results: number
   public total_pages: number
 
