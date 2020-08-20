@@ -1,43 +1,65 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <h1>Home</h1>
-      <v-text-field
-        v-model="username"
-        label="username"
-        required
+  <v-row>
+    <v-col cols="12">
+      <page-header title="Popular Movies" />
+    </v-col>
+
+    <v-col cols="12">
+      <movie-list
+        v-if="catalog"
+        :catalog="catalog"
+        @next-page="handleNextPage"
+        @previous-page="handlePreviousPage"
+        @go-to-page="handleGoToPage"
       />
-      <v-text-field
-        v-model="password"
-        label="Password"
-        required
-      />
-      <button>
-        Send
-      </button>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
+import PageHeader from '../components/shared/PageHeader.vue'
+import MovieList from '../components/movies/MovieList.vue'
 
 export default Vue.extend({
   name: 'Index',
 
-  data () {
-    return { username: null, password: null }
+  components: {
+    PageHeader,
+    MovieList
+  },
+
+  computed: {
+    ...mapGetters('movies', [
+      'catalog'
+    ])
   },
 
   mounted () {
-    this.createRequestToken()
+    this.fetchPopularMovies()
   },
 
   methods: {
-    ...mapActions('authentication', [
-      'createRequestToken'
-    ])
+    ...mapActions('movies', [
+      'fetchPopularMovies',
+      'fetchNextPopularMovies',
+      'fetchPreviousPopularMovies',
+      'fetchPagePopularMovies'
+    ]),
+
+    handleNextPage () {
+      this.fetchNextPopularMovies()
+    },
+
+    handlePreviousPage () {
+      this.fetchPreviousPopularMovies()
+    },
+
+    handleGoToPage (page: number) {
+      this.fetchPagePopularMovies(page)
+    }
   }
 })
 </script>
