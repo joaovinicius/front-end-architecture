@@ -22,7 +22,8 @@ export const getters: GetterTree<AuthenticationState, RootState> = {
   loading: state => state.loading,
   errors: state => state.errors,
   token: state => state.token,
-  session: state => state.session
+  session: state => state.session,
+  authenticated: state => !!state.session
 }
 
 export const mutations: MutationTree<AuthenticationState> = {
