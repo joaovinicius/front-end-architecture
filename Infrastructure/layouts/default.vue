@@ -1,5 +1,5 @@
 <template>
-  <v-app v-if="token">
+  <v-app v-if="token" dark>
     <Navbar />
     <v-main>
       <v-container fluid>
