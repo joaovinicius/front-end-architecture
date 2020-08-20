@@ -1,34 +1,26 @@
 <template>
-  <v-row>
-    <v-col cols="12">
-      <page-header title="Popular Movies" />
-    </v-col>
-
-    <v-col cols="12">
-      <movie-list
-        v-if="catalog"
-        :catalog="catalog"
-        @next-page="handleNextPage"
-        @previous-page="handlePreviousPage"
-        @go-to-page="handleGoToPage"
-      />
-    </v-col>
-  </v-row>
+  <movie-container-list
+    v-if="catalog"
+    :catalog="catalog"
+    page-header-title="Popular Movies"
+    @next-page="handleNextPage"
+    @previous-page="handlePreviousPage"
+    @go-to-page="handleGoToPage"
+  />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 
-import PageHeader from '../components/shared/PageHeader.vue'
-import MovieList from '../components/movies/MovieList.vue'
+import MovieContainerList
+  from '../components/movies/MovieContainerList.vue'
 
 export default Vue.extend({
   name: 'Index',
 
   components: {
-    PageHeader,
-    MovieList
+    MovieContainerList
   },
 
   computed: {
