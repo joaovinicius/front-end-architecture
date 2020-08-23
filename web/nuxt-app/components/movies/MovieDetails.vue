@@ -81,7 +81,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import Movie from '../../../Domain/Movie/Entity/Movie'
+import Movie from '../../../../Domain/Movie/Entity/Movie'
 
 interface IDescriptionList {
   title: string,

@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-import MovieService from '~/../Application/TheMovieDb/Service/MovieService'
-import SearchMoviesDTO from '~/../Application/TheMovieDb/DataTransferObject/SearchMoviesDTO'
+import MovieService
+  from '~/../../Application/TheMovieDb/Service/MovieService'
+import SearchMoviesDTO
+  from '~/../../Application/TheMovieDb/DataTransferObject/SearchMoviesDTO'
 
-import Catalog from '~/../Domain/Movie/Entity/Catalog'
-import Movie from '~/../Domain/Movie/Entity/Movie'
+import Catalog from '~/../../Domain/Movie/Entity/Catalog'
+import Movie from '~/../../Domain/Movie/Entity/Movie'
 
 import { RootState } from '~/store'
 

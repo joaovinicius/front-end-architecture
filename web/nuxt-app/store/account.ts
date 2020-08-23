@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-import AccountService from '~/../Application/TheMovieDb/Service/AccountService'
-import AddToMyWatchlistDTO from '~/../Application/TheMovieDb/DataTransferObject/AddToMyWatchlistDTO'
+import AccountService
+  from '~/../../Application/TheMovieDb/Service/AccountService'
+import AddToMyWatchlistDTO
+  from '~/../../Application/TheMovieDb/DataTransferObject/AddToMyWatchlistDTO'
 
-import Account from '~/../Domain/Account/Entity/Account'
-import Catalog from '~/../Domain/Account/Entity/Catalog'
+import Account from '~/../../Domain/Account/Entity/Account'
+import Catalog from '~/../../Domain/Account/Entity/Catalog'
 
 import { RootState } from '~/store'
 

@@ -19,8 +19,8 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import Catalog from '../../../Domain/Movie/Entity/Catalog'
 import PageHeader from '../shared/PageHeader.vue'
+import Catalog from '../../../../Domain/Movie/Entity/Catalog'
 import MovieList from './MovieList.vue'
 
 export default Vue.extend({

@@ -1,10 +1,13 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-import AuthenticationService from '~/../Application/TheMovieDb/Service/AuthenticationService'
+import AuthenticationService
+  from '~/../../Application/TheMovieDb/Service/AuthenticationService'
 
-import Token from '~/../Domain/Authentication/Entity/Token'
-import Session from '~/../Domain/Authentication/Entity/Session'
+import Token
+  from '~/../../Domain/Authentication/Entity/Token'
+import Session
+  from '~/../../Domain/Authentication/Entity/Session'
 
 import { RootState } from '~/store'
 

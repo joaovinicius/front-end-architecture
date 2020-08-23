@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Catalog from '../../../Domain/Movie/Entity/Catalog'
+import Catalog from '../../../../Domain/Movie/Entity/Catalog'
 import MovieListItem from './MovieListItem.vue'
 
 export default Vue.extend({
