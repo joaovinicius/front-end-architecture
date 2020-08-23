@@ -1,12 +1,12 @@
 copy_env:
-	cp Infrastructure/.env.example Infrastructure/.env
+	cp web/nuxt-app/.env.example Infrastructure/.env
 
 env: copy_env
-	sed -i 's/KEY_ARGUMENT/$(key)/g' Infrastructure/.env
+	sed -i 's/KEY_ARGUMENT/$(key)/g'  web/nuxt-app/.env
 
 install:
-	npm install --prefix ./Infrastructure
+	npm install --prefix ./web/nuxt-app/
 
 dev:
-	npm run dev --prefix ./Infrastructure
+	npm run dev --prefix ./web/nuxt-app/
 
