@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { AuthenticationService }
-  from '../../Domain/Service/AuthenticationService'
-import { IToken } from '../../Domain/Entity/Token'
-import { ISession } from '~/../Domain/Entity/Session'
+
+import AuthenticationService from '~/../Application/TheMovieDb/Service/AuthenticationService'
+
+import Token from '~/../Domain/Authentication/Entity/Token'
+import Session from '~/../Domain/Authentication/Entity/Session'
+
 import { RootState } from '~/store'
 
 const axiosInstance = axios.create()
@@ -37,7 +39,7 @@ export const actions: ActionTree<AuthenticationState, RootState> = {
   createRequestToken ({ commit }) {
     commit('SET_LOADING', true)
     authenticationService.createToken()
-      .then((data: IToken) => {
+      .then((data: Token) => {
         commit('SET_TOKEN', data)
       })
       .catch((error: any) => {
@@ -52,7 +54,7 @@ export const actions: ActionTree<AuthenticationState, RootState> = {
     const body = { ...payload, ...getters.token }
     commit('SET_LOADING', true)
     authenticationService.createTokenWithLogin(body)
-      .then((data: IToken) => {
+      .then((data: Token) => {
         commit('SET_TOKEN', data)
         dispatch('createSession')
       })
@@ -67,7 +69,7 @@ export const actions: ActionTree<AuthenticationState, RootState> = {
   createSession ({ commit, getters, dispatch }) {
     commit('SET_LOADING', true)
     authenticationService.createSession(getters.token)
-      .then((data: ISession) => {
+      .then((data: Session) => {
         commit('SET_SESSION', data)
         dispatch('account/myAccount', null, { root: true })
       })

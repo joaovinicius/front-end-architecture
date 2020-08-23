@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { ICatalogMovie } from '../../../Domain/Entity/Catalog'
+import ICatalogMovie from '../../../Domain/Movie/Entity/ICatalogMovie'
 
 export default Vue.extend({
   name: 'MovieList',

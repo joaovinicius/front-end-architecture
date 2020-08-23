@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { AccountService }
-  from '../../Domain/Service/AccountService'
-import { IAddToMyWatchlistDTO }
-  from '../../Domain/UseCase/AddToMyWatchlist/IAddToMyWatchlistDTO'
-import { IAccount } from '../../Domain/Entity/Account'
-import { ICatalog } from '../../Domain/Entity/Catalog'
+
+import AccountService from '~/../Application/TheMovieDb/Service/AccountService'
+import AddToMyWatchlistDTO from '~/../Application/TheMovieDb/DataTransferObject/AddToMyWatchlistDTO'
+
+import Account from '~/../Domain/Account/Entity/Account'
+import Catalog from '~/../Domain/Account/Entity/Catalog'
+
 import { RootState } from '~/store'
 
 const axiosInstance = axios.create()
@@ -40,7 +41,7 @@ export const actions: ActionTree<AccountState, RootState> = {
   myAccount ({ commit, getters }) {
     commit('SET_LOADING', true)
     accountService.myAccount(getters.sessionId)
-      .then((data: IAccount) => {
+      .then((data: Account) => {
         commit('SET_ACCOUNT', data)
       })
       .catch((error: any) => {
@@ -56,7 +57,7 @@ export const actions: ActionTree<AccountState, RootState> = {
     const { sessionId } = getters
     const accountId = getters.account.id
     accountService.myWatchlist(accountId, sessionId, page)
-      .then((data: ICatalog) => {
+      .then((data: Catalog) => {
         commit('movies/SET_CATALOG', data, { root: true })
       })
       .catch((error: any) => {
@@ -67,7 +68,7 @@ export const actions: ActionTree<AccountState, RootState> = {
       })
   },
 
-  addToMyWatchlist ({ commit, getters }, payload: IAddToMyWatchlistDTO) {
+  addToMyWatchlist ({ commit, getters }, payload: AddToMyWatchlistDTO) {
     commit('SET_LOADING', true)
     commit('SET_SAVED', false)
     const { sessionId } = getters

@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { MovieService }
-  from '../../Domain/Service/MovieService'
-import { ISearchMoviesDTO }
-  from '../../Domain/UseCase/SearchMovies/ISearchMoviesDTO'
-import { ICatalog } from '../../Domain/Entity/Catalog'
+
+import MovieService from '~/../Application/TheMovieDb/Service/MovieService'
+import SearchMoviesDTO from '~/../Application/TheMovieDb/DataTransferObject/SearchMoviesDTO'
+
+import Catalog from '~/../Domain/Movie/Entity/Catalog'
+import Movie from '~/../Domain/Movie/Entity/Movie'
+
 import { RootState } from '~/store'
-import { IMovie } from '~/../Domain/Entity/Movie'
 
 const axiosInstance = axios.create()
 const movieService = new MovieService(axiosInstance)
@@ -38,7 +39,7 @@ export const actions: ActionTree<MovieState, RootState> = {
   fetchPopularMovies ({ commit }, page: number = 1) {
     commit('SET_LOADING', false)
     movieService.getPopularMovies(page)
-      .then((data: ICatalog) => {
+      .then((data: Catalog) => {
         commit('SET_CATALOG', data)
       })
       .catch((error: any) => {
@@ -61,10 +62,10 @@ export const actions: ActionTree<MovieState, RootState> = {
     dispatch('fetchPopularMovies', page)
   },
 
-  searchMovies ({ commit }, props: ISearchMoviesDTO) {
+  searchMovies ({ commit }, props: SearchMoviesDTO) {
     commit('SET_LOADING', false)
     movieService.searchMovies(props)
-      .then((data: ICatalog) => {
+      .then((data: Catalog) => {
         commit('SET_CATALOG', data)
       })
       .catch((error: any) => {
@@ -76,9 +77,10 @@ export const actions: ActionTree<MovieState, RootState> = {
   },
 
   fetchMovieDetails ({ commit }, movieId: number) {
+    commit('SET_MOVIE', null)
     commit('SET_LOADING', false)
     movieService.getMovieDetails(movieId)
-      .then((data: IMovie) => {
+      .then((data: Movie) => {
         commit('SET_MOVIE', data)
       })
       .catch((error: any) => {
