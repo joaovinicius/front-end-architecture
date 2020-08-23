@@ -1,3 +1,3 @@
-import ICatalog from '../../Movie/Entity/ICatalog'
+import ICatalog from '../../MovieCatalog/Entity/ICatalog'
 
 export default ICatalog

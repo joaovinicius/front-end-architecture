@@ -3,7 +3,7 @@ import UseCaseFactory  from '../../Support/UseCaseFactory'
 import MovieRepository from '../Repository/MovieRepository'
 import { Routes } from './Routes'
 
-import Catalog from '../../../Domain/Movie/Entity/Catalog'
+import Catalog from '../../../Domain/MovieCatalog/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
 
 import MovieDetails from '../UseCase/MovieDetails'

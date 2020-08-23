@@ -1,4 +1,4 @@
-import Catalog from '../../../Domain/Movie/Entity/Catalog'
+import Catalog from '../../../Domain/MovieCatalog/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
 
 export default interface IMovieRepository {

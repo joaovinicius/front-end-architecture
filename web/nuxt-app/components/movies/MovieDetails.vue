@@ -79,9 +79,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 
-import Movie from '../../../../Domain/Movie/Entity/Movie'
+import IMovie from '../../../../Domain/Movie/Entity/IMovie'
 
 interface IDescriptionList {
   title: string,
@@ -93,9 +93,9 @@ export default Vue.extend({
 
   props: {
     movie: {
-      type: Movie,
+      type: Object,
       required: true
-    }
+    } as PropOptions<IMovie>
   },
 
   data () {

@@ -1,6 +1,6 @@
 import { HttpClient } from '../../Support/HttpClient'
 import IMovieRepository from './IMovieRepository'
-import Catalog from '../../../Domain/Movie/Entity/Catalog'
+import Catalog from '../../../Domain/MovieCatalog/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
 import MovieDM from '../DataMapper/MovieDM'
 import CatalogDM from '../DataMapper/CatalogDM'

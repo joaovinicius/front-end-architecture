@@ -1,3 +1,3 @@
-import Catalog from '../../Movie/Entity/Catalog'
+import Catalog from '../../MovieCatalog/Entity/Catalog'
 
 export default Catalog

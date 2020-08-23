@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Catalog from '../../../../Domain/Movie/Entity/Catalog'
+import Vue, { PropOptions } from 'vue'
+import ICatalog from '../../../../Domain/MovieCatalog/Entity/ICatalog'
 import MovieListItem from './MovieListItem.vue'
 
 export default Vue.extend({
@@ -37,9 +37,9 @@ export default Vue.extend({
 
   props: {
     catalog: {
-      type: Catalog,
+      type: Object,
       required: true
-    }
+    } as PropOptions<ICatalog>
   },
 
   methods: {

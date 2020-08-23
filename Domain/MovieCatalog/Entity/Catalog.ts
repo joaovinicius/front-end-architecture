@@ -1,9 +1,9 @@
 import ICatalog from './ICatalog'
-import ICatalogMovie from './ICatalogMovie'
+import IMovie from './IMovie'
 
 export default class Catalog implements ICatalog {
   public page: number
-  public results: Array<ICatalogMovie>
+  public results: Array<IMovie>
   public total_results: number
   public total_pages: number
 

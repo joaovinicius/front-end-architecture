@@ -1,4 +1,4 @@
-export default interface ICatalogMovie {
+export default interface IMovie {
   poster_path: string,
   adult: boolean,
   overview: string,

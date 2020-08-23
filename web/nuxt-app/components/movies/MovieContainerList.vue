@@ -17,10 +17,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 
 import PageHeader from '../shared/PageHeader.vue'
-import Catalog from '../../../../Domain/Movie/Entity/Catalog'
+import ICatalog from '../../../../Domain/MovieCatalog/Entity/ICatalog'
 import MovieList from './MovieList.vue'
 
 export default Vue.extend({
@@ -38,9 +38,9 @@ export default Vue.extend({
     },
 
     catalog: {
-      type: Catalog,
+      type: Object,
       required: true
-    }
+    } as PropOptions<ICatalog>
   },
 
   methods: {
@@ -58,7 +58,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-
-</style>

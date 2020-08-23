@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import ICatalogMovie from '../../../../Domain/Movie/Entity/ICatalogMovie'
+import IMovie from '../../../../Domain/MovieCatalog/Entity/IMovie'
 
 export default Vue.extend({
   name: 'MovieList',
@@ -51,7 +51,7 @@ export default Vue.extend({
     movie: {
       type: Object,
       required: true
-    } as PropOptions<ICatalogMovie>
+    } as PropOptions<IMovie>
   },
 
   computed: {
