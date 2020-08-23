@@ -7,7 +7,7 @@ import AddToMyWatchlistDTO
   from '~/../../Application/TheMovieDb/DataTransferObject/AddToMyWatchlistDTO'
 
 import Account from '~/../../Domain/Account/Entity/Account'
-import Catalog from '~/../../Domain/Account/Entity/Catalog'
+import Watchlist from '~/../../Domain/Account/Entity/Watchlist'
 
 import { RootState } from '~/store'
 
@@ -59,7 +59,7 @@ export const actions: ActionTree<AccountState, RootState> = {
     const { sessionId } = getters
     const accountId = getters.account.id
     accountService.myWatchlist(accountId, sessionId, page)
-      .then((data: Catalog) => {
+      .then((data: Watchlist) => {
         commit('movies/SET_CATALOG', data, { root: true })
       })
       .catch((error: any) => {

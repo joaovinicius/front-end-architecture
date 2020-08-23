@@ -1,17 +1,16 @@
 import { HttpClient } from '../../Support/HttpClient'
 import AccountRepository from '../Repository/AccountRepository'
+import AddToMyWatchlistDTO from '../DataTransferObject/AddToMyWatchlistDTO'
 import UseCaseFactory from '../../Support/UseCaseFactory'
 import { Routes } from './Routes'
 
 import Status from '../../../Domain/Account/Entity/Status'
-import Catalog from '../../../Domain/Account/Entity/Catalog'
+import Watchlist from '../../../Domain/Account/Entity/Watchlist'
 import Account from '../../../Domain/Account/Entity/Account'
 
 import AddToMyWatchlist from '../UseCase/AddToMyWatchlist'
 import MyWatchlist from '../UseCase/MyWatchlist'
 import MyAccount from '../UseCase/MyAccount'
-
-import AddToMyWatchlistDTO from '../DataTransferObject/AddToMyWatchlistDTO'
 
 export default class AccountService {
   public repository: AccountRepository
@@ -30,7 +29,7 @@ export default class AccountService {
     return addToMyWatchlist.execute(Routes.addToAccountWatchlist(accountId, sessionId), data)
   }
 
-  myWatchlist(accountId: number, sessionId: string, page: number): Promise<Catalog> {
+  myWatchlist(accountId: number, sessionId: string, page: number): Promise<Watchlist> {
     const myWatchlist = UseCaseFactory(this.repository, MyWatchlist)
 
     return myWatchlist.execute(Routes.accountWatchlist(accountId, sessionId, page))

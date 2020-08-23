@@ -1,16 +1,15 @@
 import { HttpClient } from '../../Support/HttpClient'
 import UseCaseFactory  from '../../Support/UseCaseFactory'
 import MovieRepository from '../Repository/MovieRepository'
+import SearchMoviesDTO from '../DataTransferObject/SearchMoviesDTO'
 import { Routes } from './Routes'
 
-import Catalog from '../../../Domain/MovieCatalog/Entity/Catalog'
+import Catalog from '../../../Domain/Movie/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
 
 import MovieDetails from '../UseCase/MovieDetails'
 import PopularMovies from '../UseCase/PopularMovies'
 import SearchMovies from '../UseCase/SearchMovies'
-
-import SearchMoviesDTO from '../DataTransferObject/SearchMoviesDTO'
 
 export default class MovieService {
   public repository: MovieRepository

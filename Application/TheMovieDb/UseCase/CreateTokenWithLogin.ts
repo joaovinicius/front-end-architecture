@@ -1,10 +1,10 @@
-import IAuthenticationRepository from '../Repository/IAuthenticationRepository'
-import IToken from '../../../Domain/Authentication/Entity/IToken'
+import Repository from '../../../Domain/Authentication/Repository'
+import Token from '../../../Domain/Authentication/Entity/Token'
 
 export default class CreateTokenWith {
-  constructor(private repository: IAuthenticationRepository) {}
+  constructor(private repository: Repository) {}
 
-  async execute(url: string, data: any): Promise<IToken> {
+  async execute(url: string, data: any): Promise<Token> {
     return await this.repository.createTokenWithLogin(url, data)
   }
 }

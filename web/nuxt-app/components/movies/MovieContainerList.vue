@@ -20,7 +20,7 @@
 import Vue, { PropOptions } from 'vue'
 
 import PageHeader from '../shared/PageHeader.vue'
-import ICatalog from '../../../../Domain/MovieCatalog/Entity/ICatalog'
+import ICatalog from '../../../../Domain/Movie/Entity/ICatalog'
 import MovieList from './MovieList.vue'
 
 export default Vue.extend({

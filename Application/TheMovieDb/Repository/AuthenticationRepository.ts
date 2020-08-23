@@ -1,14 +1,17 @@
 import { HttpClient } from '../../Support/HttpClient'
-import IAuthenticationRepository from './IAuthenticationRepository'
+import Repository from '../../../Domain/Authentication/Repository'
+import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
+
 import Token from '../../../Domain/Authentication/Entity/Token'
 import Session from '../../../Domain/Authentication/Entity/Session'
-import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
+
 import TokenDM from '../DataMapper/TokenDM'
 import SessionDM from '../DataMapper/SessionDM'
+
 const tokenDM = new TokenDM()
 const sessionDM = new SessionDM()
 
-export default class AuthenticationRepository implements IAuthenticationRepository {
+export default class AuthenticationRepository implements Repository {
   constructor(
     private httpClient: HttpClient
   ) {}

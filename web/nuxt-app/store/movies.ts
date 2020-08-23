@@ -6,7 +6,7 @@ import MovieService
 import SearchMoviesDTO
   from '~/../../Application/TheMovieDb/DataTransferObject/SearchMoviesDTO'
 
-import Catalog from '~/../../Domain/MovieCatalog/Entity/Catalog'
+import Catalog from '~/../../Domain/Movie/Entity/Catalog'
 import Movie from '~/../../Domain/Movie/Entity/Movie'
 
 import { RootState } from '~/store'

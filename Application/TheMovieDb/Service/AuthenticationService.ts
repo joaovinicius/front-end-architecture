@@ -1,6 +1,8 @@
 import { HttpClient } from '../../Support/HttpClient'
 import UseCaseFactory  from '../../Support/UseCaseFactory'
 import AuthenticationRepository from '../Repository/AuthenticationRepository'
+import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
+import CreateSessionDTO from '../DataTransferObject/CreateSessionDTO'
 import { Routes } from './Routes'
 
 import Token from '../../../Domain/Authentication/Entity/Token'
@@ -9,9 +11,6 @@ import Session from '../../../Domain/Authentication/Entity/Session'
 import CreateToken from '../UseCase/CreateToken'
 import CreateTokenWithLogin from '../UseCase/CreateTokenWithLogin'
 import CreateSession from '../UseCase/CreateSession'
-
-import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
-import CreateSessionDTO from '../DataTransferObject/CreateSessionDTO'
 
 export default class AuthenticationService {
   public repository: AuthenticationRepository

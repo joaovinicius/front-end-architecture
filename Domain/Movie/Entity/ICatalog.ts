@@ -1,8 +1,8 @@
-import IMovie from './IMovie'
+import ICatalogFilm from './ICatalogFilm'
 
 export default interface ICatalog {
   page: number,
-  results: Array<IMovie>,
+  results: Array<ICatalogFilm>,
   total_results: number,
   total_pages: number
 }
