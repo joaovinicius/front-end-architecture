@@ -7,9 +7,9 @@ import Status from '../../../Domain/Account/Entity/Status'
 import Catalog from '../../../Domain/Account/Entity/Catalog'
 import Account from '../../../Domain/Account/Entity/Account'
 
-import AddToMyWatchlist from '../../../Domain/Account/UseCase/AddToMyWatchlist'
-import MyWatchlist from '../../../Domain/Account/UseCase/MyWatchlist'
-import MyAccount from '../../../Domain/Account/UseCase/MyAccount'
+import AddToMyWatchlist from '../UseCase/AddToMyWatchlist'
+import MyWatchlist from '../UseCase/MyWatchlist'
+import MyAccount from '../UseCase/MyAccount'
 
 import AddToMyWatchlistDTO from '../DataTransferObject/AddToMyWatchlistDTO'
 

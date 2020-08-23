@@ -6,9 +6,9 @@ import { Routes } from './Routes'
 import Token from '../../../Domain/Authentication/Entity/Token'
 import Session from '../../../Domain/Authentication/Entity/Session'
 
-import CreateToken from '../../../Domain/Authentication/UseCase/CreateToken'
-import CreateTokenWithLogin from '../../../Domain/Authentication/UseCase/CreateTokenWithLogin'
-import CreateSession from '../../../Domain/Authentication/UseCase/CreateSession'
+import CreateToken from '../UseCase/CreateToken'
+import CreateTokenWithLogin from '../UseCase/CreateTokenWithLogin'
+import CreateSession from '../UseCase/CreateSession'
 
 import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
 import CreateSessionDTO from '../DataTransferObject/CreateSessionDTO'

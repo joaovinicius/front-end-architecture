@@ -1,5 +1,5 @@
 import { HttpClient } from '../../Support/HttpClient'
-import Repository from '../../../Domain/Account/Repository'
+import IAccountRepository from './IAccountRepository'
 
 import Status from '../../../Domain/Account/Entity/Status'
 import Catalog from '../../../Domain/Account/Entity/Catalog'
@@ -14,7 +14,7 @@ const accountDM = new AccountDM()
 const watchlistCatalogDM = new WatchlistCatalogDM()
 const statusDM = new StatusDM()
 
-export default class AccountRepository implements Repository {
+export default class AccountRepository implements IAccountRepository {
   constructor(
     private httpClient: HttpClient
   ) {}
