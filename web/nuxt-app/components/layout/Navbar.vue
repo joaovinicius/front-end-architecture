@@ -27,6 +27,8 @@
     >
       Watchlist
     </v-btn>
+
+    <login v-else />
   </v-app-bar>
 </template>
 
@@ -34,8 +36,14 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
+import Login from '../authentication/Login.vue'
+
 export default Vue.extend({
   name: 'Navbar',
+
+  components: {
+    Login
+  },
 
   data () {
     return {
@@ -58,8 +66,14 @@ export default Vue.extend({
         this.timeout = setTimeout(() => {
           this.query = query
           this.$router.push({ name: 'search-query', params: { query } })
-        }, 300)
+        }, 800)
       }
+    }
+  },
+
+  mounted () {
+    if (this.$route.params.query) {
+      this.query = this.$route.params.query
     }
   }
 })

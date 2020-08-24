@@ -1,6 +1,7 @@
 import { HttpClient } from '../../Support/HttpClient'
 import Repository from '../../../Domain/Authentication/Repository'
 import CreateTokenWithLoginDTO from '../DataTransferObject/CreateTokenWithLoginDTO'
+import CreateSessionDTO from '../DataTransferObject/CreateSessionDTO'
 
 import Token from '../../../Domain/Authentication/Entity/Token'
 import Session from '../../../Domain/Authentication/Entity/Session'
@@ -28,9 +29,8 @@ export default class AuthenticationRepository implements Repository {
     return tokenDM.responseDataToEntity(data)
   }
 
-  async createSession(url: string, request_token: string): Promise<Session> {
-    const { data } = await this.httpClient
-      .post(url, { request_token })
+  async createSession(url: string, body: CreateSessionDTO): Promise<Session> {
+    const { data } = await this.httpClient.post(url, body)
 
     return sessionDM.responseDataToEntity(data)
   }

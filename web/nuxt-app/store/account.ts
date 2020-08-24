@@ -29,7 +29,7 @@ export const getters: GetterTree<AccountState, RootState> = {
   errors: state => state.errors,
   saved: state => state.saved,
   myMovies: (state, getters, rootState, rootGetters) => rootGetters['movies/catalog'],
-  sessionId: (state, getters, rootState, rootGetters) => rootGetters['authentication/session'].id
+  sessionId: (state, getters, rootState, rootGetters) => rootGetters['authentication/session'].session_id
 }
 
 export const mutations: MutationTree<AccountState> = {
