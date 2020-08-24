@@ -1,4 +1,4 @@
-# Infrastructure
+# Nuxt app
 
 ## Build Setup
 
