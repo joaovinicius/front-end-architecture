@@ -11,6 +11,7 @@ import Session
 
 import { RootState } from '~/store'
 
+const cookie = process.client ? require('js-cookie') : undefined
 const axiosInstance = axios.create()
 const authenticationService = new AuthenticationService(axiosInstance)
 
@@ -59,6 +60,7 @@ export const actions: ActionTree<AuthenticationState, RootState> = {
     authenticationService.createTokenWithLogin(body)
       .then((data: Token) => {
         commit('SET_TOKEN', data)
+        cookie.set('token', data)
         dispatch('createSession')
       })
       .catch((error: any) => {
@@ -73,6 +75,7 @@ export const actions: ActionTree<AuthenticationState, RootState> = {
     commit('SET_LOADING', true)
     authenticationService.createSession(getters.token)
       .then((data: Session) => {
+        cookie.set('session', data)
         commit('SET_SESSION', data)
         dispatch('account/myAccount', null, { root: true })
       })

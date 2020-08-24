@@ -11,6 +11,7 @@ import Watchlist from '~/../../Domain/Account/Entity/Watchlist'
 
 import { RootState } from '~/store'
 
+const cookie = process.client ? require('js-cookie') : undefined
 const axiosInstance = axios.create()
 const accountService = new AccountService(axiosInstance)
 
@@ -46,6 +47,7 @@ export const actions: ActionTree<AccountState, RootState> = {
     commit('SET_LOADING', true)
     accountService.myAccount(getters.sessionId)
       .then((data: Account) => {
+        cookie.set('account', data)
         commit('SET_ACCOUNT', data)
       })
       .catch((error: any) => {
