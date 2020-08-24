@@ -10,7 +10,14 @@
       />
     </v-col>
 
-    <v-col cols="12">
+    <v-col v-if="!catalog.total_results">
+      <h2>No film in the catalog</h2>
+    </v-col>
+
+    <v-col
+      v-if="catalog.total_pages"
+      cols="12"
+    >
       <v-pagination
         :total-visible="6"
         :value="catalog.page"

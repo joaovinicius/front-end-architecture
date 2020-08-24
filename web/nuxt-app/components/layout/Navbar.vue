@@ -12,6 +12,7 @@
     <v-toolbar flat>
       <v-text-field
         v-model="input"
+        :loading="loading"
         placeholder="Search about your favorite movie"
         filled
         rounded
@@ -55,6 +56,12 @@ export default Vue.extend({
   computed: {
     ...mapGetters('authentication', ['authenticated']),
 
+    ...mapGetters('movies', ['loading']),
+
+    queryString (): string {
+      return this.$route.params.query || ''
+    },
+
     input: {
       get ():string {
         return this.query
@@ -66,14 +73,17 @@ export default Vue.extend({
         this.timeout = setTimeout(() => {
           this.query = query
           this.$router.push({ name: 'search-query', params: { query } })
-        }, 800)
+        }, 500)
       }
     }
   },
 
-  mounted () {
-    if (this.$route.params.query) {
-      this.query = this.$route.params.query
+  watch: {
+    queryString: {
+      handler (value) {
+        this.query = value
+      },
+      immediate: true
     }
   }
 })

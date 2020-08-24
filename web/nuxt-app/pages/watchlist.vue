@@ -1,8 +1,9 @@
 <template>
   <movie-container-list
-    v-if="catalog"
-    :catalog="catalog"
-    page-header-title="Popular Movies"
+    v-if="watchlist"
+    :catalog="watchlist"
+    :loading="loading"
+    page-header-title="Watchlist"
     @next-page="handleNextPage"
     @previous-page="handlePreviousPage"
     @go-to-page="handleGoToPage"
@@ -17,7 +18,7 @@ import MovieContainerList
   from '../components/movies/MovieContainerList.vue'
 
 export default Vue.extend({
-  name: 'Index',
+  name: 'Watchlist',
 
   middleware: 'authenticated',
 
@@ -26,33 +27,34 @@ export default Vue.extend({
   },
 
   computed: {
-    ...mapGetters('movies', [
-      'catalog'
+    ...mapGetters('account', [
+      'watchlist',
+      'loading'
     ])
   },
 
   mounted () {
-    this.fetchPopularMovies()
+    this.fetchMyWatchlist()
   },
 
   methods: {
-    ...mapActions('movies', [
-      'fetchPopularMovies',
-      'fetchNextPopularMovies',
-      'fetchPreviousPopularMovies',
-      'fetchPagePopularMovies'
+    ...mapActions('account', [
+      'fetchMyWatchlist',
+      'fetchNextMyWatchlist',
+      'fetchPreviousMyWatchlist',
+      'fetchPageMyWatchlist'
     ]),
 
     handleNextPage ():void {
-      this.fetchNextPopularMovies()
+      this.fetchNextMyWatchlist()
     },
 
     handlePreviousPage ():void {
-      this.fetchPreviousPopularMovies()
+      this.fetchPreviousMyWatchlist()
     },
 
     handleGoToPage (page: number):void {
-      this.fetchPagePopularMovies(page)
+      this.fetchPageMyWatchlist(page)
     }
   }
 })

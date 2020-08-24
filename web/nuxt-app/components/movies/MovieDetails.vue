@@ -7,10 +7,8 @@
     </v-col>
     <v-col cols="8">
       <h2>{{ movie.tagline }}</h2>
-      <v-row
-        align="center"
-        class="mx-0 mb-2"
-      >
+
+      <div class="d-flex align-center mb-2">
         <v-rating
           color="amber"
           half-increments
@@ -24,21 +22,21 @@
         <div class="grey--text ml-4 d-flex justify-space-between">
           {{ movie.vote_average / 2 }} ({{ movie.vote_count }}) - Popularity: {{ movie.popularity }}
         </div>
-      </v-row>
+      </div>
 
       <div class="d-flex">
-        <v-chip
-          v-for="genre in movie.genres"
-          :key="`genre-${genre.id}`"
-          class="mr-2"
-          v-text="genre.name"
-        />
-
         <v-chip
           v-if="movie.adult"
           color="red"
           text-color="white"
           v-text="Adult"
+        />
+
+        <v-chip
+          v-for="genre in movie.genres"
+          :key="`genre-${genre.id}`"
+          class="mr-2"
+          v-text="genre.name"
         />
       </div>
 
@@ -65,6 +63,7 @@
         >
           Homepage
         </v-btn>
+
         <v-btn
           depressed
           color="yellow"
@@ -129,6 +128,7 @@ export default Vue.extend({
         { title: 'Spoken languages', description: spokenLanguages.join(', ') }
       ]
     }
+
   }
 })
 </script>

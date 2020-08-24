@@ -4,7 +4,9 @@
       <page-header :title="pageHeaderTitle" />
     </v-col>
 
-    <v-col cols="12">
+    <loader v-if="loading" />
+
+    <v-col v-else cols="12">
       <movie-list
         v-if="catalog"
         :catalog="catalog"
@@ -20,6 +22,7 @@
 import Vue, { PropOptions } from 'vue'
 
 import PageHeader from '../shared/PageHeader.vue'
+import Loader from '../shared/Loader.vue'
 import ICatalog from '../../../../Domain/Movie/Entity/ICatalog'
 import MovieList from './MovieList.vue'
 
@@ -28,7 +31,8 @@ export default Vue.extend({
 
   components: {
     PageHeader,
-    MovieList
+    MovieList,
+    Loader
   },
 
   props: {
@@ -40,7 +44,13 @@ export default Vue.extend({
     catalog: {
       type: Object,
       required: true
-    } as PropOptions<ICatalog>
+    } as PropOptions<ICatalog>,
+
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
 
   methods: {

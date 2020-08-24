@@ -2,6 +2,7 @@
   <movie-container-list
     v-if="catalog"
     :catalog="catalog"
+    :loading="loading"
     page-header-title="Popular Movies"
     @next-page="handleNextPage"
     @previous-page="handlePreviousPage"
@@ -25,7 +26,8 @@ export default Vue.extend({
 
   computed: {
     ...mapGetters('movies', [
-      'catalog'
+      'catalog',
+      'loading'
     ])
   },
 
