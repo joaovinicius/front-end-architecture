@@ -46,6 +46,10 @@ class TheMovieDbRoutes {
   searchMovie(query: string, page: number): string {
     return `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${query}&page=${page}`
   }
+
+  movieAccountState(movieId: number, sessionId: string): string {
+    return `${this.baseUrl}movie/${movieId}/account_states?session_id=${sessionId}&api_key=${this.apiKey}`
+  }
 }
 
 const apiBaseUrl = process.env.NUXT_ENV_API_BASE_URL || ''

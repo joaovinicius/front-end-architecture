@@ -3,12 +3,15 @@ import Repository from '../../../Domain/Movie/Repository'
 
 import Catalog from '../../../Domain/Movie/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
+import State from '../../../Domain/Movie/Entity/State'
 
 import MovieDM from '../DataMapper/MovieDM'
 import CatalogDM from '../DataMapper/CatalogDM'
+import StateDM from '../DataMapper/StateDM'
 
 const movieDM = new MovieDM()
 const catalogDM = new CatalogDM()
+const stateDM = new StateDM()
 
 export default class MovieRepository implements Repository {
   constructor(
@@ -31,5 +34,11 @@ export default class MovieRepository implements Repository {
     const { data } = await this.httpClient.get(url)
 
     return movieDM.responseDataToEntity(data)
+  }
+
+  async movieAccountState(url: string): Promise<State> {
+    const { data } = await this.httpClient.get(url)
+
+    return stateDM.responseDataToEntity(data)
   }
 }

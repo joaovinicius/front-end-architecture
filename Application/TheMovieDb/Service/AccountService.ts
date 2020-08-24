@@ -25,8 +25,9 @@ export default class AccountService {
     data: AddToMyWatchlistDTO
   ): Promise<Status> {
     const addToMyWatchlist = UseCaseFactory(this.repository, AddToMyWatchlist)
+    const body = {...data, media_type: 'movie' }
 
-    return addToMyWatchlist.execute(Routes.addToAccountWatchlist(accountId, sessionId), data)
+    return addToMyWatchlist.execute(Routes.addToAccountWatchlist(accountId, sessionId), body)
   }
 
   myWatchlist(accountId: number, sessionId: string, page: number): Promise<Watchlist> {

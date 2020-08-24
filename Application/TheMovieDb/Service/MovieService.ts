@@ -6,10 +6,13 @@ import { Routes } from './Routes'
 
 import Catalog from '../../../Domain/Movie/Entity/Catalog'
 import Movie from '../../../Domain/Movie/Entity/Movie'
+import State from '../../../Domain/Movie/Entity/State'
 
 import MovieDetails from '../UseCase/MovieDetails'
 import PopularMovies from '../UseCase/PopularMovies'
 import SearchMovies from '../UseCase/SearchMovies'
+import MovieAccountState from '../UseCase/MovieAccountState'
+
 
 export default class MovieService {
   public repository: MovieRepository
@@ -34,5 +37,11 @@ export default class MovieService {
     const movieDetails = UseCaseFactory(this.repository, MovieDetails)
 
     return movieDetails.execute(Routes.movieDetails(movieId))
+  }
+
+  getMovieAccountState(movieId: number, sessionId: string): Promise<State> {
+    const movieAccountState = UseCaseFactory(this.repository, MovieAccountState)
+
+    return movieAccountState.execute(Routes.movieAccountState(movieId, sessionId))
   }
 }
