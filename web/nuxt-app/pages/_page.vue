@@ -5,6 +5,7 @@
     :loading="loading"
     page-header-title="Popular Movies"
     @next-page="handleNextPage"
+    @previous-page="handlePreviousPage"
     @go-to-page="handleGoToPage"
   />
 </template>
@@ -17,28 +18,38 @@ import MovieContainerList
   from '../components/movies/MovieContainerList.vue'
 
 export default Paginate.extend({
-  name: 'Index',
+  name: 'Page',
 
   components: {
     MovieContainerList
   },
 
   async fetch () {
-    await this.fetchPopularMovies()
+    await this.fetchPopularMovies(this.page)
   },
 
   computed: {
     ...mapGetters('movies', [
       'catalog',
       'loading'
-    ])
+    ]),
+
+    page (): string {
+      return this.$route.params.page
+    }
   },
 
   methods: {
-    ...mapActions('movies', ['fetchPopularMovies']),
+    ...mapActions('movies', [
+      'fetchPopularMovies'
+    ]),
 
     handleNextPage ():void {
-      this.goToNextPage('page', '1')
+      this.goToNextPage('page', this.page)
+    },
+
+    handlePreviousPage ():void {
+      this.goToPreviouPage('page', this.page)
     },
 
     handleGoToPage (page: number):void {

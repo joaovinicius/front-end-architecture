@@ -5,25 +5,28 @@
     :loading="loading"
     page-header-title="Watchlist"
     @next-page="handleNextPage"
-    @previous-page="handlePreviousPage"
     @go-to-page="handleGoToPage"
   />
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { mapActions, mapGetters } from 'vuex'
+import Paginate from '../../mixins/Paginate'
 
 import MovieContainerList
-  from '../components/movies/MovieContainerList.vue'
+  from '../../components/movies/MovieContainerList.vue'
 
-export default Vue.extend({
+export default Paginate.extend({
   name: 'Watchlist',
 
   middleware: 'authenticated',
 
   components: {
     MovieContainerList
+  },
+
+  async fetch () {
+    await this.fetchMyWatchlist()
   },
 
   computed: {
@@ -33,28 +36,15 @@ export default Vue.extend({
     ])
   },
 
-  mounted () {
-    this.fetchMyWatchlist()
-  },
-
   methods: {
-    ...mapActions('account', [
-      'fetchMyWatchlist',
-      'fetchNextMyWatchlist',
-      'fetchPreviousMyWatchlist',
-      'fetchPageMyWatchlist'
-    ]),
+    ...mapActions('account', ['fetchMyWatchlist']),
 
     handleNextPage ():void {
-      this.fetchNextMyWatchlist()
-    },
-
-    handlePreviousPage ():void {
-      this.fetchPreviousMyWatchlist()
+      this.goToNextPage('watchlist-page', '1')
     },
 
     handleGoToPage (page: number):void {
-      this.fetchPageMyWatchlist(page)
+      this.goToPage('watchlist-page', `${page}`)
     }
   }
 })

@@ -63,18 +63,6 @@ export const actions: ActionTree<MovieState, RootState> = {
       })
   },
 
-  fetchNextPopularMovies ({ dispatch, getters }) {
-    dispatch('fetchPopularMovies', getters.catalog.page + 1)
-  },
-
-  fetchPreviousPopularMovies ({ dispatch, getters }) {
-    dispatch('fetchPopularMovies', getters.catalog.page - 1)
-  },
-
-  fetchPagePopularMovies ({ dispatch }, page: number) {
-    dispatch('fetchPopularMovies', page)
-  },
-
   searchMovies ({ commit, dispatch }, props: SearchMoviesDTO) {
     dispatch('resetCatalog')
     commit('SET_LOADING', true)

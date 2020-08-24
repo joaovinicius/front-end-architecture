@@ -3,7 +3,7 @@
     v-if="catalog"
     :catalog="catalog"
     :loading="loading"
-    page-header-title="Popular Movies"
+    :page-header-title="searchBy"
     @next-page="handleNextPage"
     @go-to-page="handleGoToPage"
   />
@@ -11,38 +11,45 @@
 
 <script lang="ts">
 import { mapActions, mapGetters } from 'vuex'
-import Paginate from '../mixins/Paginate'
-
+import Paginate from '../../../mixins/Paginate'
 import MovieContainerList
-  from '../components/movies/MovieContainerList.vue'
+  from '../../../components/movies/MovieContainerList.vue'
 
 export default Paginate.extend({
-  name: 'Index',
+  name: 'SearchMovie',
 
   components: {
     MovieContainerList
   },
 
   async fetch () {
-    await this.fetchPopularMovies()
+    await this.searchMovies({ query: this.query, page: 1 })
   },
 
   computed: {
     ...mapGetters('movies', [
       'catalog',
       'loading'
-    ])
+    ]),
+
+    query ():string {
+      return this.$route.params.query
+    },
+
+    searchBy ():string {
+      return `Search by ${this.query}`
+    }
   },
 
   methods: {
-    ...mapActions('movies', ['fetchPopularMovies']),
+    ...mapActions('movies', ['searchMovies']),
 
     handleNextPage ():void {
-      this.goToNextPage('page', '1')
+      this.goToNextPage('search-query-page', '1', this.query)
     },
 
     handleGoToPage (page: number):void {
-      this.goToPage('page', `${page}`)
+      this.goToPage('search-query-page', `${page}`, this.query)
     }
   }
 })

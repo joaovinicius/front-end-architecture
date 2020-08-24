@@ -11,17 +11,20 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { mapActions, mapGetters } from 'vuex'
-
+import Paginate from '../../../mixins/Paginate'
 import MovieContainerList
-  from '../../components/movies/MovieContainerList.vue'
+  from '../../../components/movies/MovieContainerList.vue'
 
-export default Vue.extend({
-  name: 'SearchMovie',
+export default Paginate.extend({
+  name: 'SearchMoviePage',
 
   components: {
     MovieContainerList
+  },
+
+  async fetch () {
+    await this.searchMovies({ query: this.query, page: this.page })
   },
 
   computed: {
@@ -34,28 +37,28 @@ export default Vue.extend({
       return this.$route.params.query
     },
 
+    page ():string {
+      return this.$route.params.page
+    },
+
     searchBy ():string {
       return `Search by ${this.query}`
     }
-  },
-
-  mounted () {
-    this.searchMovies({ query: this.query, page: 1 })
   },
 
   methods: {
     ...mapActions('movies', ['searchMovies']),
 
     handleNextPage ():void {
-      this.searchMovies({ query: this.query, page: (this.catalog.page + 1) })
+      this.goToNextPage('search-query-page', this.page, this.query)
     },
 
     handlePreviousPage ():void {
-      this.searchMovies({ query: this.query, page: (this.catalog.page - 1) })
+      this.goToPreviouPage('search-query-page', this.page, this.query)
     },
 
     handleGoToPage (page: number):void {
-      this.searchMovies({ query: this.query, page })
+      this.goToPage('search-query-page', `${page}`, this.query)
     }
   }
 })
